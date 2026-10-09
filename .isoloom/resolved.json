@@ -41,5 +41,15 @@
     "default_position": "networks",
     "positions": []
   },
-  "message": null
+  "cloud": {
+    "provider": "aws",
+    "terraform": "terraform",
+    "outputs": [
+      "account_id",
+      "apigateway_url"
+    ],
+    "inputs": [],
+    "hourly_usd": 0.01
+  },
+  "message": "The application answers at {{ cloud.outputs.apigateway_url }}\n(account {{ cloud.outputs.account_id }}). You start with nothing but the page. Goal: credentials\nfrom the Cognito identity pool. Cheat sheet:\napp/cloudgoat/scenarios/aws/vulnerable_cognito/cheat_sheet.md\n"
 }
