@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://www.isoloom.com/schema/v1.json
+# CloudGoat's vulnerable_cognito scenario by Rhino Security Labs
+# (https://github.com/RhinoSecurityLabs/cloudgoat), in your own AWS account.
+# Source in app/ (upstream, unchanged); terraform/ is this lab's wrapper around the scenario's own
+# terraform/ folder, feeding it what CloudGoat's CLI would.
+# Run: `aws login`, then `isoloom run cloud-services`; end it with `isoloom down cloud-services`.
+version: 1
+name: cloudgoat-vulnerable-cognito
+
+cloud:
+  provider: aws
+  terraform: terraform
+  vars:
+    region: us-east-1
+    profile: default
+  outputs:
+    account_id: account_id
+    apigateway_url: apigateway_url
+  hourly_usd: 0.01
+
+checks:
+  - name: the sign-up page answers
+    http: "{{ cloud.outputs.apigateway_url }}"
+    wait: 300
+  - name: it is the vulnerable Cognito application
+    http: "{{ cloud.outputs.apigateway_url }}"
+    contains: Cognito
+
+message: |
+  The application answers at {{ cloud.outputs.apigateway_url }}
+  (account {{ cloud.outputs.account_id }}). You start with nothing but the page. Goal: credentials
+  from the Cognito identity pool. Cheat sheet:
+  app/cloudgoat/scenarios/aws/vulnerable_cognito/cheat_sheet.md

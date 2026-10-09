@@ -1,0 +1,8 @@
+{
+  "title": "CloudGoat: vulnerable Cognito",
+  "description": "A CloudGoat scenario by Usama Azad, deployed into your own AWS account: a sign-up and login page backed by Amazon Cognito. Bypass the sign-up restrictions and abuse Cognito misconfigurations to elevate your privileges and obtain Cognito identity pool credentials.",
+  "question": "Obtain AWS credentials from the scenario's Cognito identity pool as an admin user.",
+  "category": "MISC",
+  "difficulty": 2,
+  "evidence_kind": "SECRET"
+}
