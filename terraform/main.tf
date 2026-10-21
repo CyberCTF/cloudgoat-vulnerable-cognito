@@ -30,7 +30,7 @@ resource "random_string" "cgid" {
 }
 
 module "scenario" {
-  source       = "../app/cloudgoat/scenarios/aws/vulnerable_cognito/terraform"
+  source       = "./scenario"
   profile      = var.profile
   region       = var.region
   cgid         = "vulnerable_cognito_cgid${random_string.cgid.result}"
